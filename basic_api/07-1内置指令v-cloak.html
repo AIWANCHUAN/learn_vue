@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- v-cloak 指令不需要表达式  当我们使用vue插值语法时{{message}}遇到网速较慢时，直到vue编译完模板才显示正确的值，这时
+    屏幕会有闪烁， 加入 v-cloak 指令可以解决这个问题
+    -->
+    <div id="app" v-cloak>
+        {{message}}
+    </div>
+</body>
+<script src="vue.min.js"></script>
+<script>
+    var app=new Vue({
+        el:'#app',
+        data:{
+            message:'this is vue'
+        }
+    });
+</script>
+</html>

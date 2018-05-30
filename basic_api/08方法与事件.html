@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            点击次数：{{counter}}
+            <div>
+                <!-- 没有参数的方法可以不写() -->
+                <button @click="addCounter(1,$event)">+1</button>
+            </div>
+            <div>
+                <button @click="addCounter(10)">+10</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="vue.min.js"></script>
+<script>
+    var app=new Vue({
+        el:"#app",
+        data:{
+            counter:0,
+        },
+        methods:{
+            addCounter:function(count,event){
+                //vue提供了一个特殊的参数$event事件参数
+                //在v-on指令绑定事件时，有很多修饰符让我们开发更简便
+                //修饰符的用法师 @click.stop
+                //修饰符可以连用，有按键修饰符，事件修饰符，都可以连用
+                console.log(event)
+                var count = count||1;
+                //methods 方法里面的this指向的不是事件源 而是当前的vue实例
+                this.counter+=count;
+            }
+        }
+    });
+</script>
+</html>

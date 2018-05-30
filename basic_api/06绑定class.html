@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div :class="appCls"></div>
+    </div>
+
+    <div id="app1">
+        <div :class="[say,isActive?active:error]"></div>
+    </div>
+
+    <div id="app2">
+            <div :class="cls"></div>
+        </div>
+</body>
+<script src="vue.min.js"></script>
+<script>
+
+    //对象语法：类名作为属性名，值是对应的data数据，值为真添加该类名，假不添加。
+    //可以与普通class属性共存
+    //可以使用计算属性
+    //可以直接绑定一个data里的Object
+    //可以使用methods
+    var app = new Vue({
+        el: "#app",
+        data: {
+            appCls: {
+                cls1: true,
+                cls2: false,
+            }
+        },
+    });
+
+    //数组语法：当需要应用多个class可以使用数组语法
+    //数组语法的数组元素为data数据，最后绑定的class是data数据对应的值。
+    //也可以使用三元表达式根据条件切换class
+    var app1=new Vue({
+        el:"#app1",
+        data:{
+            say:"hello",
+            isActive:true,
+            active:'activity',
+            error:'unactivity',
+        }
+    });
+
+    //数组语法也可以包含对象用法和computed和methods
+    var app2=new Vue({
+        el:"#app2",
+        data:{
+            size:'large',
+            disable:true,
+        },
+        computed:{
+            cls:function(){
+                return [
+                    "btn",
+                    {
+                        ["btn-"+this.size]:this.size!=="",
+                        ["btn-disabled"]:this.disable,
+                    }
+                ]
+            }
+        }
+    });
+</script>
+
+</html>

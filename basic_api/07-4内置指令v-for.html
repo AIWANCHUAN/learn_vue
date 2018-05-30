@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="book in books">
+                <div>{{book.name}}</div>
+                <div>{{book.price}}</div>
+            </li>
+        </ul>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+
+        //循环需要用到v-for指令  表达式需要结合 in来使用（of 也可以）
+        //表达式格式： item in items   item表示的是数组的元素   items是data里的数组类型的数据
+
+        //可以使用数组的索引值  ： (item,index) in items  第二个参数就是索引
+
+        var appp=new Vue({
+            el:"#app",
+            data:{
+                books:[
+                    {name:"<<vue.js实战>>",price:50.00},
+                    {name:"<<javascript语言精粹>>",price:49.90},
+                    {name:"<<javascript高级程序设计>>",price:52.50}
+                ]
+            }
+        });
+
+        //v-for 还可以遍历对象， item in items  这时item对应的是对象的 “属性值” ，items是对象
+        //遍历对象时也可以有多个参数   （item，key，index） in items  参数分别是 属性值、属性名和索引
+
+
+        //v-for 同样可以结合template元素使用，循环多个元素
+
+        //v-for 也可以循环整数  ： v-for="n in 10"
+    </script>
+</body>
+</html>

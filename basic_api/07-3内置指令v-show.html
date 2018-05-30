@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div v-show="show">
+            {{message}}
+        </div>
+    </div>
+</body>
+<script src="vue.min.js"></script>
+<script>
+    //v-show指令用法和v-if类似，值为真显示假隐鲹
+    
+    //v-if 是动态的渲染与删除dom元素  适用于不经常切换改变的场景  优点是在初次渲染时速度快
+    //v-show 是改变元素的display属性，在初次渲染页面时不论现实还是隐藏的元素都已加载。  适用于经常切换的场景，优点是切换效率高只改变css
+    
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'this is vue',
+            show:true
+        }
+    });
+
+    
+</script>
+
+</html>
