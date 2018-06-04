@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 文本框和文本域等非选择的表单元素中  v-model相当于value值 -->
+    <div id="app">
+        <input type="text" v-model="message"> {{message}}
+    </div>
+
+
+
+    <div id="app1">
+        <!-- 单独使用的话，直接:checked=boolean 就可以了 -->
+        <input type="radio" v-model="checked" value="radiobox">
+        checked:{{checked}}
+        <!-- 多个互斥使用的话，绑定同一个v-model（相当于name） 并给每个radio加上value属性  选择哪个v-model的值就是哪个的value值 -->
+        <div>
+            <input type="radio" v-model="multi" value="11111">
+            <input type="radio" v-model="multi" value="2222">
+            <input type="radio" v-model="multi" value="33333">
+            <input type="radio" v-model="multi" value="444444">
+            multi:{{multi}}
+        </div>
+    </div>
+
+
+    <div id="app2">
+        <!-- 多选框单独使用和单选框差不多 -->
+        <!-- 多选框多个使用的话  v-model也是绑定同一个值  然后必须都有value属性 -->
+        <!-- v-model绑定的是一个数组类型的数据，如果选择那么就将该复选框的value值push到这个数组，取消则删除，可以双向操作 -->
+        <label for="">苹果</label><input type="checkbox" v-model="fruit" value="苹果">
+        <label for="">橘子</label><input type="checkbox" v-model="fruit" value="橘子">
+        <label for="">香蕉</label><input type="checkbox" v-model="fruit" value="香蕉">
+        <label for="">菠萝</label><input type="checkbox" v-model="fruit" value="菠萝">
+        <div>
+            <p>fruit:</p>
+            <p v-for="item in fruit">
+                {{item}}
+            </p>
+        </div>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'abcdefg'
+            }
+        })
+
+        var app1 = new Vue({
+            el: "#app1",
+            data: {
+                checked: false,
+                multi:"2222",
+            }
+        });
+
+
+        var app2=new Vue({
+            el:"#app2",
+            data:{
+                fruit:[],
+            }
+        });
+    </script>
+</body>
+
+</html>
