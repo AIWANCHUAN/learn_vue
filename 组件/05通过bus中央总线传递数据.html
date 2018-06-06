@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        总数：{{total}}
+        <my-component></my-component>
+    </div>
+
+    <script src="vue.min.js"></script>
+    <script>
+        //什么是bus中央总线：  就是一个传递数据的解决方式，你也可以叫别的任何名字  aus  cus bus只是比较形象
+        //这个解决方式具体是什么：
+        //第一步：创建一个名为bus的空vue实例
+        //第二步：定义组件
+        //第三部：在声明周期或者任何函数内   使用bus发射自定义事件   使用bus接收自定义事件
+
+        //在多人协作时非常有用，可以共享信息
+        var bus = new Vue();
+
+        Vue.component("my-component", {
+            template: "<div>\
+                <button @click='incrise'>+1</button>\
+                <button @click='reduce'>-1</button>\
+            </div>",
+            data: function () {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                incrise: function () {
+                    this.counter++;
+                    //使用bus发射自定义事件
+                    bus.$emit("incrise-total", this.counter);
+                },
+                reduce: function () {
+                    this.counter--;
+                    bus.$emit("reduce-total", this.counter);
+                }
+            }
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                total: 0,
+            },
+            mounted: function () {
+                var _this = this;
+                bus.$on('incrise-total', function (counter) {
+                    _this.total = counter;
+                });
+                bus.$on('reduce-total', function (counter) {
+                    _this.total = counter;
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>

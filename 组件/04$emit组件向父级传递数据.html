@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>count:{{num}}</p>
+        <!-- 在调用子组件的时候  监听自定义事件，数据作为自定义事件的处理函数的参数接收 -->
+        <sub-component  @increase-num="handleGetCounter"  @reduce-num="handleGetCounter"></sub-component>
+    </div>
+
+    <!-- 这里有个语法糖  利用v-model="父级的数据"  直接将传来的数据赋值给父级的某个数据 -->
+    <script src="vue.min.js"></script>
+    <script>
+
+        //子组件像父级传递数据需要用到  $emit()事件
+        //第一个参数是自定义事件名称  第二个参数是要传递的数据
+        //在父级调用组件时，用v-on监听子组件发来的自定义事件  自定义事件的处理函数的参数就是传递来的数据
+        Vue.component("sub-component", {
+            template: "\
+                <div>\
+                    <button @click='increaseCounter'>+1</button>\
+                    <button @click='reduceCounter'>-1</button>\
+                </div>",
+            data: function () {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                increaseCounter: function () {
+                    this.counter++;
+                    //通过$emit方法向父级发射自定义事件，并将数据作为参数，传递到父级的事件处理函数中
+                    this.$emit("increase-num",this.counter);
+                    //这里有个坑：自定义事件不要用驼峰命名，否则无效
+                },
+                reduceCounter: function () {
+                    this.counter--;
+                    //通过$emit方法向父级发射自定义事件，并将数据作为参数，传递到父级的事件处理函数中
+                    this.$emit("reduce-num",this.counter);
+                    //这里有个坑：自定义事件不要用驼峰命名，否则无效
+                }
+            }
+        });
+
+
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num: 0
+            },
+            methods: {
+                handleGetCounter: function (counter) {
+                    //参数counter是从子组件接收来的
+                    this.num = counter;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

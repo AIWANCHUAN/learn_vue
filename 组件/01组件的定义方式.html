@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <nav-component></nav-component>
+    </div>
+
+    <div id="app1">
+        <sub-component></sub-component>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        //全局定义：注意：如果一个实例要使用全局定义的组件，那么这个实例必须要在全局组件定义后再创建才行
+        //也就是说把全局定义的组件写在各个实例之上就行了
+        Vue.component("nav-component",{
+            template:'<nav>导航组件</nav>'
+        });
+
+        var app=new Vue({
+            el:"#app"
+        })
+
+        //局部注册：通过实例的components属性来注册,局部注册的组件只能在实例范围内使用
+        var app1=new Vue({
+            el:'#app1',
+            components:{
+                'sub-component':{
+                    template:"<div>这是一个局部组件</div>"
+                }
+            }
+        });
+    </script>
+</body>
+</html>

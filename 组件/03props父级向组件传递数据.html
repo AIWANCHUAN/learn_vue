@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-component :parent-data="message"></my-component>
+    </div>
+
+    <div id="app1">
+        <my-component1 :parent-data="message" :phone="111"></my-component1>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+
+        //父级通过 v-bind:数据名="值"  的方式向组件传递数据
+        //在子组件内可以通过props属性来接收数据，如果是数组形式的，只需要将传递的数据变为字符串存放到数组里即可。
+        //然后在组件内使用就行了
+
+        //在2.0中数据是单向的：就是说父级的数据变化会更新子组件的数据，反之则不行
+        Vue.component("my-component", {
+            template: '<div>{{parentData}}</div>',
+            props: ['parentData']
+        });
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: '这是父级数据'
+            }
+        });
+
+
+        //props 还有一种形式是对象形式
+        //当需要对传递的数据进行验证时需要使用对象形式
+        Vue.component("my-component1", {
+            template: '<div>{{parentData}}<div>{{phone}}</div></div>',
+            props: {
+                parentData:String,
+                phone:{
+                    type:Number,
+                    default:13666666666
+                }
+            }
+        });
+        var app1 = new Vue({
+            el: "#app1",
+            data: {
+                message: '这是父级数据',
+            }
+        });
+    </script>
+</body>
+
+</html>

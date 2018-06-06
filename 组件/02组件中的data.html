@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+
+        //组件中还可以像vue实例那样使用其他选项（data、methods、computed等）
+        //但是使用data属性时有所不同：data必须是一个函数，然后return一个对象，将该对象作为数据
+        //如果组件中的data数据引用的是外部对象，那么这个组件多次使用时数据的改动在多个组件是同步的
+        //如果每个组件的数据想要独立的话就不要使用外部对象,而是return一个新对象
+
+        var app=new Vue({
+            el:"#app",
+            components:{
+                'my-component':{
+                    template:"<button @click='counter++'>{{counter}}</button>",
+                    data:function(){
+                        return {
+                            counter:0
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
