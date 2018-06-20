@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child-component>
+            <p>替代子组件slot标签的内容</p>
+            <p>更多替代子组件slot标签的内容</p>
+        </child-component>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+
+        //我们在html的插值语法{{data}}，这就是slot，也叫内容分发
+        //在子组件的模板内，使用<slot>元素，可以开启一个slot插槽，在父组件模板中，将元素标签插入子组件元素标签内后，所有的子组件模板中的slot标签内容将
+//被替代。
+        
+        //如果父组件没有插入元素标签，那么子组件的slot标签内部的内容作为默认渲染到dom结构中
+        //父组件插入的元素标签如果和slot标签内的元素标签类型不同，在渲染时你在父组件插入什么标签还是什么标签
+        Vue.component("child-component",{
+            template:'\
+                <div>\
+                    <slot>\
+                        <p>如果父组件没有插入内容，我将作为默认出现。</p>\
+                    </slot>\
+                </div>'
+        })
+
+        var app=new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>                                                                                                     

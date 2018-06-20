@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <!-- 用script标签书写模板更方便 -->
+        <script id="tem-my-component" type="text/x-template">
+           <div>
+                <p>这是x-template模板</p>
+                <p>只需将组件的template指向这个模板的id</p>
+                <p> 将script标签的type更改成“text/x-template”</p>
+           </div>
+        </script>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+
+        Vue.component("my-component", {
+            template: '#tem-my-component'
+        });
+
+        var app = new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+
+</html>

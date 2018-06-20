@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <component :is="currentCom"></component>   
+        <button @click="changeCom('A')">切换A组件</button>
+        <button @click="changeCom('B')">切换B组件</button>
+        <button @click="changeCom('C')">切换C组件</button>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        var app=new Vue({
+            el:"#app",
+            data:{
+                currentCom:'comA',
+            },
+            components:{
+                comA:{
+                    template:"<p>这是A组件</p>"
+                },
+                comB:{
+                    template:"<p>这是B组件</p>"
+                },
+                comC:{
+                    template:"<p>这是C组件</p>"
+                }
+            },
+            methods:{
+                changeCom:function(component){
+                    this.currentCom='com'+component;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
