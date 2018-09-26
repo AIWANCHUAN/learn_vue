@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <tabs v-model="activeKey">
+            <pane label="标签一" name="first" closable="true">
+                标签一的内容
+            </pane>
+            <pane label="标签二" name="second" closable="false">
+                标签二的内容
+            </pane>
+            <pane label="标签三" name="third" closable="true">
+                标签三的内容
+            </pane>
+        </tabs>
+    </div>
+    <script type="text/x-template" id="tabs-temp">
+        <!-- tabs 组件模板 -->
+        <div class="tabs">
+            <div class="tabs-bar">
+                <!-- 标签页标题  这里要用  v-for -->
+                <div :class="tabsCls(item)"
+                     v-for="(item,index) in navList"
+                     @click="handleChange(index)">
+                    {{item.label}}
+                </div>
+            </div>
+            <div class="tabs-content">
+                <!-- 这里的 slot 就是嵌套的 pane 组件 -->
+                <slot></slot>
+            </div>
+        </div>
+    </script>
+
+    <script src="vue.min.js"></script>
+    <script>
+        var bus = new Vue();
+    </script>
+    <script src="pane.js"></script>
+    <script src="tab.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                activeKey: 'second',
+            }
+        });
+    </script>
+</body>
+
+</html>
